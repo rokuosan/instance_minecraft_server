@@ -16,8 +16,10 @@ public class Paper {
     private JSONObject json;
     private JSONArray items;
 
-    // Function: getVersions
-    // Description: Get Supported Versions from Paper API.
+    /**
+     * Get Supported Versions from Paper API.<br>PaperAPIからバージョンを取得する
+     * @return List&lt;String&gt; versions
+     */
     public List<String> getVersions(){
         List<String> versions = new ArrayList<>(); // バージョンを格納する
 
@@ -39,8 +41,11 @@ public class Paper {
         return versions;
     }
 
-    // Function: getBuilds
-    // Description: Get supported builds from Paper API.
+    /**
+     * Get supported builds from Paper API.<br>PaperAPIから引数のバージョンのビルドを取得
+     * @param version Game Version
+     * @return List&lt;String&gt; builds
+     */
     public List<String> getBuilds(String version){
         List<String> builds = new ArrayList<>();
 
@@ -60,8 +65,13 @@ public class Paper {
         return builds;
     }
 
-    // Function: download
-    // Description: Download software.
+    /**
+     * Download software.<br>引数のパスに引数のバージョンとビルドをダウンロードします
+     * @param path The directory you want to download
+     * @param version Minecraft version
+     * @param build Supported build
+     * @return boolean
+     */
     public boolean download(Path path, String version, String build){
         try {
             URL url = new URL(api + "versions/" + version + "/builds/" + build + "/downloads/paper-" + version + "-" + build + ".jar");
@@ -71,8 +81,12 @@ public class Paper {
         }
     }
 
-    // Function: install(Path)
-    // Description: Install Paper to your computer. Use the latest version and build.
+    /**
+     * Install Paper to your computer. Use the latest version and build.<br>
+     * Paperをインストールします。最新のバージョンとビルドを使用します。
+     * @param path Install directory path
+     *
+     */
     public boolean install(Path path){
         List<String> versions = getVersions(); // バージョン取得
         String version = versions.get(versions.size()-1); // バージョンを最新版に
